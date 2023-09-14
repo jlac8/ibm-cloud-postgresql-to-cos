@@ -12,7 +12,8 @@ PG_DATABASE = "ibmclouddb"
 PG_USER = "ibm_cloud_a6fdcd2a_e069_42df_8660_c597dd7f9137"
 PGPASSWORD = "a27f8208166da9eb0c84bfd67c7d2e94b973de61becafbb7fe2fc140fc1a1c0c"
 FECHAYHORA = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
-PG_FILENAME = f"C:\\Users\\Administrator\\Desktop\\backup_{PG_DATABASE}_{FECHAYHORA}.csv"
+PG_FILENAME = f"./backup_{PG_DATABASE}_{FECHAYHORA}.csv"
+
 
 # Exportar registros segun su fecha de creacion de la tabla en CSV con maximun file size: 10000000 y Delimiter: | 
 

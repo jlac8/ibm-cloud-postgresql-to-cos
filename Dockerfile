@@ -22,17 +22,17 @@ ARG UID=10001
 RUN adduser \
     --disabled-password \
     --gecos "" \
-    --home "/nonexistent" \
-    --shell "/sbin/nologin" \
-    --no-create-home \
+    --home "/app" \
     --uid "${UID}" \
     appuser
+
+RUN chown appuser:appuser /app
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
-RUN pip install --no-cache-dir psycopg2-binary ibm_boto3
+RUN pip install --no-cache-dir psycopg2-binary ibm-cos-sdk
 
 # Switch to the non-privileged user to run the application.
 USER appuser
