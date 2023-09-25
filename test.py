@@ -61,10 +61,10 @@ except Exception as e:
 
 # Enviar full backup y archivo CSV al COS
 
-APIKEY = os.environ.get("COS_APIKEY")
-ENDPOINT = os.environ.get("COS_ENDPOINT")
-SERVICE_INSTANCE_ID = os.environ.get("COS_SERVICE_INSTANCE_ID")
-BUCKET_NAME = os.environ.get("COS_BUCKET_NAME")
+APIKEY = os.environ.get("APIKEY")
+ENDPOINT = os.environ.get("ENDPOINT")
+SERVICE_INSTANCE_ID = os.environ.get("SERVICE_INSTANCE_ID")
+BUCKET_NAME = os.environ.get("BUCKET_NAME")
 OBJECT_NAME = f"backup_{PG_DATABASE}_{FECHAYHORA}.csv"
 BACKUP_OBJECT_NAME = f"fullbackup_{PG_DATABASE}_{FECHAYHORA}.backup"
 
