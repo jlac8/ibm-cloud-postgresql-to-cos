@@ -7,11 +7,11 @@ import subprocess
 
 # Conectar a PostgreSQL
 
-PG_HOST = "2a52f379-43f7-48e7-b921-75e35f47354c.c7e06sed0lktba7pbqj0.databases.appdomain.cloud"
-PG_PORT = 31174
-PG_DATABASE = "ibmclouddb"
-PG_USER = "ibm_cloud_a6fdcd2a_e069_42df_8660_c597dd7f9137"
-PGPASSWORD = "a27f8208166da9eb0c84bfd67c7d2e94b973de61becafbb7fe2fc140fc1a1c0c"
+PG_HOST = os.environ.get("PG_HOST")
+PG_PORT = int(os.environ.get("PG_PORT", 31174))
+PG_DATABASE = os.environ.get("PG_DATABASE")
+PG_USER = os.environ.get("PG_USER")
+PGPASSWORD = os.environ.get("PGPASSWORD")
 FECHAYHORA = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
 PG_FILENAME = f"./backup_logs_{FECHAYHORA}.csv"
 PG_BACKUP_FILENAME = f"./fullbackup_{PG_DATABASE}_{FECHAYHORA}.backup"
@@ -61,10 +61,10 @@ except Exception as e:
 
 # Enviar full backup y archivo CSV al COS
 
-APIKEY = "EoWupNvkc3psf5NA1hxNIvRzPp1NZ7YqSVUIjdLyGekX"
-ENDPOINT = "https://s3.us-east.cloud-object-storage.appdomain.cloud" 
-SERVICE_INSTANCE_ID = "crn:v1:bluemix:public:cloud-object-storage:global:a/7746f5d28823528f9bda3f8ee8d49f45:27025f65-a180-41da-b690-df7ed1ced264::"
-BUCKET_NAME = "test-script-bucket"
+APIKEY = os.environ.get("COS_APIKEY")
+ENDPOINT = os.environ.get("COS_ENDPOINT")
+SERVICE_INSTANCE_ID = os.environ.get("COS_SERVICE_INSTANCE_ID")
+BUCKET_NAME = os.environ.get("COS_BUCKET_NAME")
 OBJECT_NAME = f"backup_{PG_DATABASE}_{FECHAYHORA}.csv"
 BACKUP_OBJECT_NAME = f"fullbackup_{PG_DATABASE}_{FECHAYHORA}.backup"
 
