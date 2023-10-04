@@ -15,7 +15,6 @@ PGPASSWORD = os.environ.get("PGPASSWORD")
 FECHAYHORA = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
 PG_FILENAME = f"./backup_logs_{FECHAYHORA}.csv"
 PG_BACKUP_FILENAME = f"./fullbackup_{PG_DATABASE}_{FECHAYHORA}.backup"
-TABLE_NAME = os.environ.get("TABLE_NAME")
 
 try:
     conn = psycopg2.connect(
@@ -48,8 +47,8 @@ try:
 
     query_export = """
     COPY (
-        SELECT * FROM {TABLE_NAME} WHERE fecha >= date_trunc('MONTH', current_date - INTERVAL '2 MONTH')
-        AND fecha < date_trunc('MONTH', current_date);)
+        SELECT * FROM public.log WHERE fecharegistro >= date_trunc('MONTH', current_date - INTERVAL '2 MONTH')
+        AND fecharegistro < date_trunc('MONTH', current_date);)
         TO STDOUT WITH CSV HEADER DELIMITER '|'
     """
 
