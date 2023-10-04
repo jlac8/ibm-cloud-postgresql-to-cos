@@ -47,8 +47,10 @@ try:
     cur = conn.cursor()
 
     query_export = """
-    COPY (SELECT * FROM {TABLE_NAME} WHERE fecha >= date_trunc('MONTH', current_date - INTERVAL '2 MONTH') 
-    AND fecha < date_trunc('MONTH', current_date - INTERVAL '1 MONTH')) TO STDOUT WITH CSV HEADER DELIMITER '|'
+    COPY (
+        SELECT * FROM {TABLE_NAME} WHERE fecha >= date_trunc('MONTH', current_date - INTERVAL '2 MONTH')
+        AND fecha < date_trunc('MONTH', current_date);)
+        TO STDOUT WITH CSV HEADER DELIMITER '|'
     """
 
     with open(PG_FILENAME, 'w') as f:
